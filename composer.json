@@ -18,6 +18,16 @@
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": { "\\Cyphp\\Data\\": "src/" }
+        "psr-4": { "Cyphp\\Data\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cyphp\\Data\\": "tests/" 
+        }
+    },
+    "scripts": {
+        "test": [
+            "./vendor/bin/phpunit"
+        ]
     }
 }
