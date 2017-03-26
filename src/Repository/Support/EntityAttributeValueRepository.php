@@ -150,11 +150,11 @@ class EntityAttributeValueRepository extends AbstractRepository implements Entit
         throw new \Exception('EAV does not support soft deletion.');
     }
 
-    public function query($criteria)
+    public function query($criteria, array $options = [])
     {
         $criteria[$this->getPrimaryKey()] = $this->getEntityId();
 
-        return parent::query($criteria);
+        return parent::query($criteria, $options);
     }
 
     public function all()

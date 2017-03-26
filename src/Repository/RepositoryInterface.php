@@ -12,7 +12,7 @@ interface RepositoryInterface
 
     public function hide(int $id);
 
-    public function query($criteria);
+    public function query($criteria, array $options = []);
 
     public function get(int $id);
 

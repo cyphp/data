@@ -156,14 +156,16 @@ abstract class AbstractRepository implements
         ]);
     }
 
-    public function query($criteria)
+    public function query($criteria, array $options = [])
     {
         $qb = $this->getConnection()->createQueryBuilder();
         $qb->select('*')
             ->from($this->getTable(), $this->getTableAlias());
 
+        // in the future release, this section should be replace by a map/reduce pattern of codes
         $this->addCriteriaTo($criteria, $qb);
-
+        $this->addOptionsTo($options);
+        
         return $qb->execute()->fetchAll();
     }
 
@@ -215,6 +217,21 @@ abstract class AbstractRepository implements
         // use named parameter - to save coder from writing setParameter(...)
         foreach ($criteria as $key => $value) {
             $this->addCriterionTo($key, $value, $qb);
+        }
+    }
+
+    protected function addOptionsTo(array $options, QueryBuilder $qb)
+    {
+        if (isset($options['order'])) {
+            foreach ($options['order'] as $columbn => $order) {
+                $qb->addOrderBy($column, $order);
+            }
+        }
+
+        if (isset($options['limit'])) {
+            $qb
+                ->setFirstResult($options['limit']['offset'] ?? 0)
+                ->setMaxResults($options['limit']['size'] ?? 20);
         }
     }
 
