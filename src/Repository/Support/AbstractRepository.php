@@ -223,7 +223,7 @@ abstract class AbstractRepository implements
     protected function addOptionsTo(array $options, QueryBuilder $qb)
     {
         if (isset($options['order'])) {
-            foreach ($options['order'] as $columbn => $order) {
+            foreach ($options['order'] as $column => $order) {
                 $qb->addOrderBy($column, $order);
             }
         }
