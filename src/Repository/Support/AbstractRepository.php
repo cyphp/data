@@ -164,7 +164,7 @@ abstract class AbstractRepository implements
 
         // in the future release, this section should be replace by a map/reduce pattern of codes
         $this->addCriteriaTo($criteria, $qb);
-        $this->addOptionsTo($options);
+        $this->addOptionsTo($options, $qb);
         
         return $qb->execute()->fetchAll();
     }
